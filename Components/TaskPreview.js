@@ -5,13 +5,9 @@ import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export default class TaskPreview extends Component
 {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
-      <Card onPress={ () => alert("Abrir tarea") } style={styles.card}>
+      <Card onPress={ () => this.props.navigation.navigate('Show', this.props.task) } style={styles.card}>
         <View style={styles.view}>
           <Checkbox
             style={{width: '10%'}}

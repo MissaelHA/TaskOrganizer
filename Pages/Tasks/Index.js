@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
-import { Button } from 'react-native-paper';
+import { IconButton, Button } from 'react-native-paper';
 import Profile from '../../Components/Profile';
 import TaskPreview from '../../Components/TaskPreview';
 import LogoutButton from '../../Components/LogoutButton';
@@ -18,10 +18,39 @@ export default class Index extends Component
     return (
       <View style={styles.page}>
         <Profile />
+
+        <View
+          style={styles.inline}
+        >
+          <View style={[styles.itemHolder, {width: '20%'}]}>
+            <IconButton
+              icon="plus"
+              color="white"
+              style={{ backgroundColor: "#7B8D93", margin: 0}}
+              size={30}
+              onPress={() => this.props.navigation.navigate("Create")}
+            />
+          </View>
+          <View style={[styles.itemHolder, {width: '80%'}]}>
+            <Button
+              mode="contained"
+              color="#7B8D93"
+              compact dark
+              onPress={() => this.props.navigation.navigate("Create")}
+            >
+              Agregar tarea
+            </Button>
+          </View>
+        </View>
+
         <ScrollView>
           {
             tasks.map((task, i) => {
-              return <TaskPreview task={task} key={i} />
+              return <TaskPreview
+                task={task}
+                navigation={this.props.navigation}
+                key={i}
+              />
             })
           }
         </ScrollView>
@@ -64,4 +93,13 @@ const styles = StyleSheet.create({
     height: '100%',
     padding: 15,
   },
+  inline: {
+    flex: 1,
+    flexDirection: 'row',
+    width: '100%'
+  },
+  itemHolder: {
+    alignContent: 'center',
+    justifyContent: 'center'
+  }
 });
